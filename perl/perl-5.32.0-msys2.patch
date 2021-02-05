@@ -677,10 +677,17 @@ diff -Naur perl-5.32.0-orig/cpan/Win32/t/GetCurrentThreadId.t perl-5.32.0/cpan/W
      skip(!defined &Cygwin::pid_to_winpid,
  	 Cygwin::pid_to_winpid($pid),
  	 Win32::GetCurrentProcessId());
+<<<<<<< HEAD:perl/perl-5.32.0-msys2.patch
 diff -Naur perl-5.32.0-orig/cpan/Win32/t/Unicode.t perl-5.32.0/cpan/Win32/t/Unicode.t
 --- perl-5.32.0-orig/cpan/Win32/t/Unicode.t	2020-07-15 08:44:24.762669200 +0300
 +++ perl-5.32.0/cpan/Win32/t/Unicode.t	2020-07-15 08:48:31.952121800 +0300
 @@ -80,7 +80,7 @@
+=======
+diff -Naur perl-5.28.0-orig/cpan/Win32/t/Unicode.t perl-5.28.0/cpan/Win32/t/Unicode.t
+--- perl-5.28.0-orig/cpan/Win32/t/Unicode.t	2018-03-20 23:06:36.000000000 +0300
++++ perl-5.28.0/cpan/Win32/t/Unicode.t	2018-06-28 07:53:18.615782100 +0300
+@@ -79,7 +79,7 @@
+>>>>>>> 19eb8a39110994ece8fb5305b239914e4268364f:perl/perl-5.28.0-msys2.patch
  
  # cwd() on Cygwin returns a mapped path that we need to translate
  # back to a Windows path. Invoking `cygpath` on $subdir doesn't work.
@@ -752,20 +759,25 @@ diff -Naur perl-5.32.0-orig/cpan/Win32API-File/t/file.t perl-5.32.0/cpan/Win32AP
  $ok or print "# ",$let.substr($path,3)."/win.ini ",fileLastError(),"\n";
  print $ok ? "" : "not ", "ok ", ++$test, "\n";	# ok 50
  
+<<<<<<< HEAD:perl/perl-5.32.0-msys2.patch
 diff -Naur perl-5.32.0-orig/Cross/Makefile-cross-SH perl-5.32.0/Cross/Makefile-cross-SH
 --- perl-5.32.0-orig/Cross/Makefile-cross-SH	2020-06-15 02:01:24.000000000 +0300
 +++ perl-5.32.0/Cross/Makefile-cross-SH	2020-07-15 08:48:31.967853200 +0300
 @@ -61,8 +61,8 @@
+=======
+diff -Naur perl-5.28.0-orig/Cross/Makefile-cross-SH perl-5.28.0/Cross/Makefile-cross-SH
+--- perl-5.28.0-orig/Cross/Makefile-cross-SH	2018-05-21 15:29:23.000000000 +0300
++++ perl-5.28.0/Cross/Makefile-cross-SH	2018-06-28 07:53:18.638783500 +0300
+@@ -61,7 +61,7 @@
+>>>>>>> 19eb8a39110994ece8fb5305b239914e4268364f:perl/perl-5.28.0-msys2.patch
  				${revision}.${patchlevel}.${subversion} \
  			     -install_name \$(shrpdir)/\$@"
  		;;
 -	cygwin*)
--		linklibperl="-lperl"
 +	cygwin* | msys*)
-+		linklibperl="-L. -lperl"
+ 		linklibperl="-lperl"
  		;;
  	sunos*)
- 		linklibperl="-lperl"
 @@ -467,7 +467,7 @@
  
  !NO!SUBS!
@@ -955,10 +967,17 @@ diff -Naur perl-5.32.0-orig/dist/PathTools/Cwd.pm perl-5.32.0/dist/PathTools/Cwd
        $newdir =~ s|\A///+|//|;
        $newdir =~ s|(?<=[^/])//+|/|g;
      }
+<<<<<<< HEAD:perl/perl-5.32.0-msys2.patch
 diff -Naur perl-5.32.0-orig/dist/PathTools/lib/File/Spec/Cygwin.pm perl-5.32.0/dist/PathTools/lib/File/Spec/Cygwin.pm
 --- perl-5.32.0-orig/dist/PathTools/lib/File/Spec/Cygwin.pm	2020-06-15 02:01:25.000000000 +0300
 +++ perl-5.32.0/dist/PathTools/lib/File/Spec/Cygwin.pm	2020-07-15 08:48:31.986600500 +0300
 @@ -117,12 +117,12 @@
+=======
+diff -Naur perl-5.28.0-orig/dist/PathTools/lib/File/Spec/Cygwin.pm perl-5.28.0/dist/PathTools/lib/File/Spec/Cygwin.pm
+--- perl-5.28.0-orig/dist/PathTools/lib/File/Spec/Cygwin.pm	2018-05-21 15:29:23.000000000 +0300
++++ perl-5.28.0/dist/PathTools/lib/File/Spec/Cygwin.pm	2018-06-28 07:53:18.902798600 +0300
+@@ -117,7 +117,7 @@
+>>>>>>> 19eb8a39110994ece8fb5305b239914e4268364f:perl/perl-5.28.0-msys2.patch
  =cut
  
  sub case_tolerant {
@@ -967,6 +986,7 @@ diff -Naur perl-5.32.0-orig/dist/PathTools/lib/File/Spec/Cygwin.pm perl-5.32.0/d
      and defined &Cygwin::mount_flags;
  
    my $drive = shift;
+<<<<<<< HEAD:perl/perl-5.32.0-msys2.patch
    if (! $drive) {
 -      my @flags = split(/,/, Cygwin::mount_flags('/cygwin'));
 +      my @flags = split(/,/, Cygwin::mount_flags('/msys'));
@@ -976,6 +996,11 @@ diff -Naur perl-5.32.0-orig/dist/PathTools/lib/File/Spec/Cygwin.pm perl-5.32.0/d
 diff -Naur perl-5.32.0-orig/dist/PathTools/lib/File/Spec/Unix.pm perl-5.32.0/dist/PathTools/lib/File/Spec/Unix.pm
 --- perl-5.32.0-orig/dist/PathTools/lib/File/Spec/Unix.pm	2020-06-15 02:01:25.000000000 +0300
 +++ perl-5.32.0/dist/PathTools/lib/File/Spec/Unix.pm	2020-07-15 08:48:31.986600500 +0300
+=======
+diff -Naur perl-5.28.0-orig/dist/PathTools/lib/File/Spec/Unix.pm perl-5.28.0/dist/PathTools/lib/File/Spec/Unix.pm
+--- perl-5.28.0-orig/dist/PathTools/lib/File/Spec/Unix.pm	2018-05-21 15:29:23.000000000 +0300
++++ perl-5.28.0/dist/PathTools/lib/File/Spec/Unix.pm	2018-06-28 07:53:18.911799100 +0300
+>>>>>>> 19eb8a39110994ece8fb5305b239914e4268364f:perl/perl-5.28.0-msys2.patch
 @@ -57,7 +57,7 @@
        $node = $1;
      }
@@ -1551,6 +1576,7 @@ diff -Naur perl-5.32.0-orig/Makefile.SH perl-5.32.0/Makefile.SH
  	-rm -f $(PERL_EXE) $(MINIPERL_EXE) $(LIBPERL) libperl.* microperl
  	-rm -f config.arch config.over $(DTRACE_H)
  
+<<<<<<< HEAD:perl/perl-5.32.0-msys2.patch
 @@ -1542,7 +1542,7 @@
  '') $spitshell >>$Makefile <<'!NO!SUBS!'
  test_prep test-prep: test_prep_pre $(MINIPERL_EXE) $(unidatafiles) $(PERL_EXE) \
@@ -1563,6 +1589,11 @@ diff -Naur perl-5.32.0-orig/Makefile.SH perl-5.32.0/Makefile.SH
 diff -Naur perl-5.32.0-orig/regen/regen_lib.pl perl-5.32.0/regen/regen_lib.pl
 --- perl-5.32.0-orig/regen/regen_lib.pl	2020-06-15 02:01:25.000000000 +0300
 +++ perl-5.32.0/regen/regen_lib.pl	2020-07-15 08:48:32.142921600 +0300
+=======
+diff -Naur perl-5.28.0-orig/regen/regen_lib.pl perl-5.28.0/regen/regen_lib.pl
+--- perl-5.28.0-orig/regen/regen_lib.pl	2018-05-21 15:29:23.000000000 +0300
++++ perl-5.28.0/regen/regen_lib.pl	2018-06-28 07:53:21.586949900 +0300
+>>>>>>> 19eb8a39110994ece8fb5305b239914e4268364f:perl/perl-5.28.0-msys2.patch
 @@ -7,7 +7,7 @@
  
  # Common functions needed by the regen scripts
@@ -1724,7 +1755,7 @@ diff -Naur perl-5.32.0-orig/t/op/sigdispatch.t perl-5.32.0/t/op/sigdispatch.t
  	if is_miniperl() || !$Config{d_sigprocmask};
      skip("This doesn\'t work on $^O threaded builds RT#88814", 17)
 -        if ($^O =~ /cygwin/ && $Config{useithreads});
-+        if ($^O =~ /cygwin|msys/ && $Config{useithreads});
++        if ($^O =~ /cygwin|msys/ && $Config{useithreads})
      skip("This doesn\'t work on $^O version $Config{osvers} RT#88814", 17)
          if ($^O eq "openbsd" && $Config{osvers} < 5.2);
  
@@ -1799,7 +1830,7 @@ diff -Naur perl-5.32.0-orig/t/porting/extrefs.t perl-5.32.0/t/porting/extrefs.t
      my ($c, %args) = @_;
  
 -    my $ld_exeext = ($^O eq 'cygwin' || $^O eq 'MSWin32' ||
-+    my $ld_exeext = ($^O eq 'cygwin' || $^O eq 'msys' || $^O eq 'MSWin32' ||
++    my $ld_exeext = ($^O eq 'cygwin' || $^O eq 'MSWin32' || $^O eq 'msys' ||
                   $^O eq 'os2' && $Config{ldflags} =~ /-Zexe\b/) ? '.exe' :
                  (($^O eq 'vos') ? $Config{exe_ext} : '');
  
